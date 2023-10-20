@@ -108,7 +108,7 @@ const uploadCsvFile = async (req, res) => {
     return res.status(500).send({ status: false, error: "internal server error", message: err.message, });
   }
 };
-
+// get data by author id
 const getUploadedData = async (req, res) => {
   try {
     const authorId = req.params.authorId;

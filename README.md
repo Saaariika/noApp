@@ -142,7 +142,7 @@ Response : {
 }
 
 
-4. Get upload csv data API : Retrieval is happen with pagination each page return 5 documents 
+4. Get upload csv data API by author Id: Retrieval is happen with pagination each page return 5 documents 
                              if you want to go on any random page pass query parametes with key name is page
                              which return to you on that particular page otherwise it will return on first page with 5 documents
 
@@ -211,3 +211,74 @@ Response:   {
     "page": 2
 }
    
+5. Get upload csv data API by upload Id:   logic is same as 4th api
+
+Endpoint:  baseUrl/uploaded-data/1/65319cebc09279f963f39760?page=2
+
+Response : {
+    "status": true,
+    "message": "uploaded data retrieved successfully",
+    "data": [
+        {
+            "_id": "65321a10f64df5b2211af6c9",
+            "serialNo": 1,
+            "authorName": "Rahul Shandilya",
+            "uploadId": "1",
+            "authorId": "65319cebc09279f963f39760",
+            "bookName": "Myth",
+            "ISBN": 2234567890123,
+            "__v": 0,
+            "createdAt": "2023-10-20T06:11:28.325Z",
+            "updatedAt": "2023-10-20T06:11:28.325Z"
+        },
+        {
+            "_id": "65321a10f64df5b2211af6cb",
+            "serialNo": 3,
+            "authorName": "Rahul Shandilya",
+            "uploadId": "1",
+            "authorId": "65319cebc09279f963f39760",
+            "bookName": "Gemini",
+            "ISBN": 2234567890145,
+            "__v": 0,
+            "createdAt": "2023-10-20T06:11:28.326Z",
+            "updatedAt": "2023-10-20T06:11:28.326Z"
+        },
+        {
+            "_id": "65321a10f64df5b2211af6ca",
+            "serialNo": 2,
+            "authorName": "Rahul Shandilya",
+            "uploadId": "1",
+            "authorId": "65319cebc09279f963f39760",
+            "bookName": "History of one day",
+            "ISBN": 2234567890134,
+            "__v": 0,
+            "createdAt": "2023-10-20T06:11:28.326Z",
+            "updatedAt": "2023-10-20T06:11:28.326Z"
+        },
+        {
+            "_id": "65321a10f64df5b2211af6cd",
+            "serialNo": 5,
+            "authorName": "Rahul Shandilya",
+            "uploadId": "1",
+            "authorId": "65319cebc09279f963f39760",
+            "bookName": "The cloud",
+            "ISBN": 2234567890167,
+            "__v": 0,
+            "createdAt": "2023-10-20T06:11:28.327Z",
+            "updatedAt": "2023-10-20T06:11:28.327Z"
+        },
+        {
+            "_id": "65321a10f64df5b2211af6cc",
+            "serialNo": 4,
+            "authorName": "Rahul Shandilya",
+            "uploadId": "1",
+            "authorId": "65319cebc09279f963f39760",
+            "bookName": "Earth orbit",
+            "ISBN": 2234567890159,
+            "__v": 0,
+            "createdAt": "2023-10-20T06:11:28.327Z",
+            "updatedAt": "2023-10-20T06:11:28.327Z"
+        }
+    ],
+    "page": 2
+}
