@@ -18,7 +18,7 @@ mongoose.connect("mongodb+srv://saaariik-sarul:Rahul1991*@cluster0.adxgdju.mongo
         console.log(err)
     })
 app.use('/', route)
-// establish connection 
+// establish connection to server
 app.listen(3000, (() => {
     console.log("server run on port 3000");
 }))

@@ -35,10 +35,5 @@ const csvSchema = new mongoose.Schema(
         }
 
     },
-    { timestamps: true }
-
-
-
-
-)
+    { timestamps: true })
 module.exports = mongoose.model("csv", csvSchema)

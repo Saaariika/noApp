@@ -7,22 +7,21 @@ const uploadCsvFile = async (req, res) => {
   try {
     // validate incoming request
     let authorId = req.params.authorId;
-    console.log("authorid", authorId)
     if (!authorId) {
-      return res.status(400).send({ status: false, message: "invalid/missing parameters author id" })
+      return res.status(400).send({ status: false, message: "invalid/missing parameters author id" });
     }
 
     // check for authorisation
     if (req.userId !== authorId) {
-      return res.status(401).send({ status: false, message: "unauthorised" })
+      return res.status(401).send({ status: false, message: "unauthorised" });
     }
     if (!req.file) {
       return res.status(400).json({ status: false, errorType: "no file uploaded" });
     }
     // find author name from user collection
-    let authorData = await userModel.findOne({ _id: authorId })
+    let authorData = await userModel.findOne({ _id: authorId });
     if (!authorData) {
-      return res.status(404).send({ status: false, message: "no such author found" })
+      return res.status(404).send({ status: false, message: "no such author found" });
     }
     const authorName = authorData.userName;
 
@@ -48,9 +47,9 @@ const uploadCsvFile = async (req, res) => {
           validationErrors.push(`row ${rowIndex}: ISBN is required and must be either 10 or 13 digits number.`);
         }
         // assign author id to each row of csv file
-        row.authorId = authorId.trim()
+        row.authorId = authorId.trim();
         // assign author name to each row of csv file
-        row.authorName = authorName.trim()
+        row.authorName = authorName.trim();
         // more validation checks for each row of csv file
         if (validationErrors.length === 0) {
           csvData.push({
