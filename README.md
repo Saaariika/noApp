@@ -28,7 +28,7 @@ steps:   Clone git repo by the provided url
          go to src folder
          run command npx nodemon index.js 
          application will listen on port of baseUrl localhost:3000
-
+Method :POST
 1. Registration of user API :  userName: { String,Mandatory},emailId: { String,Mandatory,Unique  }, password: {String,Mandatory}, phoneNo: { String,Mandatory,Unique},
 
 Endpoint:      baseUrl/register
@@ -56,7 +56,7 @@ Response:     {
 }
 
 
-
+Method :POST
 2. Log In of user API :  emailId: { String,Mandatory,Unique  }, password: {String,Mandatory}
 
 Endpoint:      baseUrl/login
@@ -72,8 +72,8 @@ Response :   {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMyMDMwNGU0ZGJhNmU3YWZkYjg5YTMiLCJpYXQiOjE2OTc3NzY2ODYsImV4cCI6MTY5Nzg2MzA4Nn0.eydKdpshNNZfmAm1IekE-Z15108XOi4nnLwyXAVjg3g"
 }
 
-
-3 Upload csv data API: serialNo: { Number,Mandatory},authorName: { String, Mandatory },authorId: { String, Mandatory } , bookName: { String, Mandatory Unique }, ISBN: { Number, Mandatory Unique }
+Method :POST
+3 Upload csv data API: serialNo: { Number,Mandatory},authorName: { String, Mandatory },authorId: { String, Mandatory } , bookName: { String, Mandatory Unique }, ISBN: { Number, Mandatory Unique },uploadId:{String,Mandatory,Unique}
 
 Note: authorId must be pass in path parameters, use form data to csv file with key name is csvFile
 
@@ -141,7 +141,7 @@ Response : {
     ]
 }
 
-
+Method :GET
 4. Get upload csv data API by author Id: Retrieval is happen with pagination each page return 5 documents 
                              if you want to go on any random page pass query parametes with key name is page
                              which return to you on that particular page otherwise it will return on first page with 5 documents
@@ -210,10 +210,12 @@ Response:   {
     ],
     "page": 2
 }
-   
+
+
+Method :GET 
 5. Get upload csv data API by upload Id:   logic is same as 4th api (whole as same)
 
-Endpoint:  baseUrl/uploaded-data/1/65319cebc09279f963f39760?page=2
+Endpoint:  baseUrl/uploaded-data/c51521bc897bddd22d40cd42f805bb5c/65319cebc09279f963f39760?page=2
 
 Response : {
     "status": true,

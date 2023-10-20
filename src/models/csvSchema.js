@@ -14,10 +14,11 @@ const csvSchema = new mongoose.Schema(
             trim: true
 
         },
-        uploadId:{
-            type:String,
-            required:true,
-            trim:true
+        uploadId: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true
         },
         authorId: {
             type: String,

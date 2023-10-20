@@ -18,9 +18,7 @@ const uploadCsvFile = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ status: false, message: "no file uploaded" });
     }
-    if (!req.body.uploadId) {
-      return res.status(400).send({ status: false, message: "upload id required" })
-    }
+
     // find author name from user collection
     let authorData = await userModel.findOne({ _id: authorId });
     if (!authorData) {
@@ -61,7 +59,7 @@ const uploadCsvFile = async (req, res) => {
             bookName: row.bookName,
             authorId: row.authorId,
             authorName: row.authorName,
-            uploadId: req.body.uploadId.trim()
+            uploadId: req.file.filename.trim()
           });
         }
       })
