@@ -211,7 +211,7 @@ Response:   {
     "page": 2
 }
    
-5. Get upload csv data API by upload Id:   logic is same as 4th api
+5. Get upload csv data API by upload Id:   logic is same as 4th api (whole as same)
 
 Endpoint:  baseUrl/uploaded-data/1/65319cebc09279f963f39760?page=2
 

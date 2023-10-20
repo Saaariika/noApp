@@ -174,7 +174,7 @@ const getUploadedDataByUploadId = async (req, res) => {
 
     // query the mongoDB database to retrieve the data based on uploadId with pagination
     const uploadedData = await csvModel
-      .find({ uploadId }) // Assuming you have a field for uploadId in your data model
+      .find({ uploadId })
       .skip(skip)
       .limit(perPage);
 
@@ -194,11 +194,6 @@ const getUploadedDataByUploadId = async (req, res) => {
     return res.status(500).send({ status: false, error: "internal server error", message: err.message });
   }
 };
-
-
-
-
-
 
 
 
