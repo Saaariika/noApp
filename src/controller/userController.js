@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const userModel = require('../models/userSchema.js')
 
-
-const createUser = async function (req, res) {
+const createUser = async (req, res) => {
     try {
         // validate incoming request body 
         if (Object.keys(req.body).length === 0) {
@@ -70,7 +69,7 @@ const createUser = async function (req, res) {
     catch (err) { return res.status(500).send({ Error: "internal server error", message: err.message, status: false }) }
 }
 
-const loginUser = async function (req, res) {
+const loginUser = async (req, res) => {
     try {
         // validate incoming request
         if (!req.body.emailId) {

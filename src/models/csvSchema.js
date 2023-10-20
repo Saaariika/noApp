@@ -13,6 +13,12 @@ const csvSchema = new mongoose.Schema(
             required: true,
             trim: true
 
+        },
+        authorId: {
+            type: String,
+            required: true,
+            trim: true
+
         }
         ,
         bookName: {
