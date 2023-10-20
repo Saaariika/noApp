@@ -16,7 +16,10 @@ const uploadCsvFile = async (req, res) => {
       return res.status(401).send({ status: false, message: "unauthorised" });
     }
     if (!req.file) {
-      return res.status(400).json({ status: false, errorType: "no file uploaded" });
+      return res.status(400).json({ status: false, message: "no file uploaded" });
+    }
+    if (!req.body.uploadId) {
+      return res.status(400).send({ status: false, message: "upload id required" })
     }
     // find author name from user collection
     let authorData = await userModel.findOne({ _id: authorId });
@@ -43,7 +46,7 @@ const uploadCsvFile = async (req, res) => {
           validationErrors.push(`row ${rowIndex}: book name is required.`);
         }
         // can use regex also to validate ISBN
-        if (!row.ISBN || !row.ISBN.trim() || !/^(?:\d{10}|\d{13})$/.test(row.ISBN.trim()) || typeof (row.ISBN) !== "number") {
+        if (!row.ISBN || !row.ISBN.trim() || !/^(?:\d{10}|\d{13})$/.test(row.ISBN.trim())) {
           validationErrors.push(`row ${rowIndex}: ISBN is required and must be either 10 or 13 digits number.`);
         }
         // assign author id to each row of csv file
@@ -57,7 +60,8 @@ const uploadCsvFile = async (req, res) => {
             ISBN: row.ISBN,
             bookName: row.bookName,
             authorId: row.authorId,
-            authorName: row.authorName
+            authorName: row.authorName,
+            uploadId: req.body.uploadId.trim()
           });
         }
       })
@@ -148,8 +152,54 @@ const getUploadedData = async (req, res) => {
   }
 };
 
+// get previous uploded data by upload id
+const getUploadedDataByUploadId = async (req, res) => {
+  try {
+    const uploadId = req.params.uploadId;
+    const authorId = req.params.authorId;
+    if (req.userId !== authorId) {
+      return res.status(401).send({ status: false, message: "unauthorised" });
+    }
+
+    if (!uploadId) {
+      return res.status(400).send({ status: false, message: "invalid/missing parameter upload id" });
+    }
+
+    // get the page number from the query parameters, or default to page 1
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 5; // number of documents to retrieve per page
+
+    // calculate the number of documents to skip
+    const skip = (page - 1) * perPage;
+
+    // query the mongoDB database to retrieve the data based on uploadId with pagination
+    const uploadedData = await csvModel
+      .find({ uploadId }) // Assuming you have a field for uploadId in your data model
+      .skip(skip)
+      .limit(perPage);
+
+    if (uploadedData.length === 0) {
+      return res.status(404).send({ status: false, message: "no uploaded data found for the specified uploadId" });
+    }
+
+    // respond with the retrieved data
+    return res.status(200).json({
+      status: true,
+      message: "uploaded data retrieved successfully",
+      data: uploadedData,
+      page,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({ status: false, error: "internal server error", message: err.message });
+  }
+};
 
 
 
 
-module.exports = { uploadCsvFile, getUploadedData };
+
+
+
+
+module.exports = { uploadCsvFile, getUploadedData, getUploadedDataByUploadId };

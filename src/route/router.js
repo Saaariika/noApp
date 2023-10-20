@@ -17,6 +17,7 @@ router.post('/login', userController.loginUser)
 router.post('/upload/:authorId', middleware.authentication, upload.single('csvFile'), csvController.uploadCsvFile)
 // get previously uploaded data by user using authentication 
 router.get('/uploaded-data/:authorId', middleware.authentication, csvController.getUploadedData);
+router.get('/uploaded-data/:uploadId/:authorId', middleware.authentication, csvController.getUploadedData);
 
 
 
